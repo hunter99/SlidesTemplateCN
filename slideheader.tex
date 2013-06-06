@@ -1,0 +1,253 @@
+\documentclass[CJK,notheorems,compress,mathserif,table]{beamer}
+\usepackage{ifxetex}
+\usepackage{ifpdf}
+
+%\useoutertheme[height=0.1\textwidth,width=0.15\textwidth,hideothersubsections]{sidebar}
+%\usecolortheme{whale}      % Outer color themes: whale, seahorse, dolphin
+%\usecolortheme{orchid}     % Inner color themes: lily, orchid
+%\useinnertheme[shadow]{rounded}
+%\setbeamercolor{sidebar}{bg=blue!50}
+%\setbeamercolor{background canvas}{bg=blue!9}
+%\usefonttheme{serif}
+\setbeamertemplate{navigation symbols}{}
+\usetheme{default}
+
+%%------------------------常用宏包---------------------------------------------------------------------
+
+\mode<article> % 仅应用于article版本
+{
+  \usepackage{beamerbasearticle}
+  \usepackage{fullpage}
+  \usepackage{hyperref}
+}
+%\usepackage[font=Times, timeinterval=10, timeduration=30,
+%timewarningfirst=85, timewarningsecond=90,
+%fillcolorwarningsecond=white!60!yellow]{tdclock}
+%\setbeameroption{show notes}
+\setbeameroption{hide notes}
+%\usepackage{ifpdf}
+%% 下面的包控制beamer的风格，可以根据自己的爱好修改
+\usepackage{beamerthemesplit}   % 使用split风格
+\usepackage{beamerthemeshadow}  % 使用shadow风格
+\usepackage{amsmath,amssymb}
+\ifxetex
+  \usepackage[BoldFont,SlantFont,CJKchecksingle]{xeCJK}
+  \setCJKmainfont[BoldFont=SimHei]{SimSun}
+  \setCJKmonofont{SimSun}% 设置缺省中文字体
+
+%  \DeclareGraphicsExtensions{.pdf,.jpg,.jpeg,.png}
+\else
+  \usepackage{CJKutf8}
+  \usepackage{CJKnumb}
+  \usepackage{CJKpunct}
+  \usepackage{CJKspace}
+%	\ifpdf
+%	  \usepackage[pdftex]{graphicx}
+%	  \graphicspath{./pics/}
+%	  \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+%	\else
+%	  \usepackage[dvips]{graphicx}
+%	  \graphicspath{{./pics/}}
+%	  \DeclareGraphicsExtensions{.eps,.ps}
+%	\fi
+\fi
+\usepackage{graphicx}
+\graphicspath{{./pics/}}
+
+%\usepackage{CJKutf8}
+\usepackage{hyperref}
+\hypersetup{CJKbookmarks=true}
+%\usepackage{graphicx}
+%\graphicspath{{./pics/}}
+%%\DeclareGraphicsRule{*}{mps}{*}{}
+\usepackage{subfigure}
+\usepackage{xmpmulti}
+\usepackage{colortbl,dcolumn}
+\usepackage{multimedia}
+\usepackage{chemarr}
+%pgf由beamer的开发者tantau开发，由以在beamer中精确作图。
+\usepackage{pgf,pgfarrows,pgfnodes,pgfautomata,pgfheaps}
+
+%% 下面的代码用来读入Logo图象
+%\pgfdeclaremask{logomask}{pics/thu-logo1-mask.eps}
+%\pgfdeclareimage[mask=logomask,height=1.5cm]{logo}{pics/thu-logo1.eps}
+
+%设置logo图标
+%\logo{\includegraphics[height=0.09\textwidth]{pics/thu-logo2.jpg}}
+\logo{\includegraphics[height=0.09\textwidth,bb=0 0 489 490]{pics/thu-logo2.png}}
+
+\renewcommand{\raggedright}{\leftskip=0pt \rightskip=0pt plus 0cm}
+\raggedright
+
+\def\hilite<#1>{%
+\temporal<#1>{\color{blue!35}}{\color{magenta}}%
+{\color{blue!75}}}
+
+\newcolumntype{H}{>{\columncolor{blue!20}}c!{\vrule}}
+\newcolumntype{H}{>{\columncolor{blue!20}}c}
+%==================================参考文献==============================================================
+\newcommand{\upcite}[1]{\textsuperscript{\cite{#1}}}  %自定义命令\upcite, 使参考文献引用以上标出现
+%\bibliographystyle{plain}% set in slidereference.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%重定义字体、字号命令 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\songti}{\CJKfamily{song}}        % 宋体
+\newcommand{\fangsong}{\CJKfamily{fs}}        % 仿宋体
+\newcommand{\kaishu}{\CJKfamily{kai}}         % 楷体
+\newcommand{\heiti}{\CJKfamily{hei}}          % 黑体
+\newcommand{\lishu}{\CJKfamily{li}}           % 隶书
+\newcommand{\youyuang}{\CJKfamily{you}}       % 幼圆
+\newcommand{\sihao}{\fontsize{14pt}{\baselineskip}\selectfont}      % 字号设置
+\newcommand{\xiaosihao}{\fontsize{12pt}{\baselineskip}\selectfont}  % 字号设置
+\newcommand{\wuhao}{\fontsize{10.5pt}{\baselineskip}\selectfont}    % 字号设置
+\newcommand{\xiaowuhao}{\fontsize{9pt}{\baselineskip}\selectfont}   % 字号设置
+\newcommand{\liuhao}{\fontsize{7.875pt}{\baselineskip}\selectfont}  % 字号设置
+\newcommand{\qihao}{\fontsize{5.25pt}{\baselineskip}\selectfont}    % 字号设置
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\argmax}{\operatornamewithlimits{argmax}}
+\newcommand{\argmin}{\operatornamewithlimits{argmin}}
+\newcommand{\tfn}[1]{\footnote{\tiny #1}}
+\begin{document}
+%\initclock
+\ifxetex
+\else
+\begin{CJK}{UTF8}{song}
+\fi
+\ifxetex
+%\pgfdeclaremask{thumask}{pics/thu-mark1-mask.png}
+%\pgfdeclareimage[mask=thumask,height=0.25cm]{thu}{pics/thu-mark1.png}
+\pgfdeclareimage[height=0.25cm]{thu}{pics/thu-mark1.png}
+\pgfdeclareimage[height=0.25cm]{thunew}{pics/thu-mark1.png}
+
+%\pgfdeclaremask{titlelogomask}{pics/thu-gate2-mask.jpg}
+%\pgfdeclareimage[mask=titlelogomask,height=2.5cm]{titlelogo}{pics/thu-gate2.jpg}
+\pgfdeclareimage[height=2.5cm]{titlelogo}{pics/thu-gate2.jpg}
+\pgfdeclareimage[height=2.5cm]{titlelogonew}{pics/thu-gate2.jpg}
+\else
+\ifpdf
+\pgfdeclaremask{thumask}{pics/thu-mark1-mask.png}
+\pgfdeclareimage[mask=thumask,height=0.25cm]{thu}{pics/thu-mark1.png}
+\pgfdeclareimage[height=0.4cm]{thunew}{pics/thu-mark1.png}
+
+\pgfdeclaremask{titlelogomask}{pics/thu-gate2-mask.jpg}
+\pgfdeclareimage[mask=titlelogomask,height=2.5cm]{titlelogo}{pics/thu-gate2.jpg}
+\pgfdeclareimage[height=2.5cm]{titlelogonew}{pics/thu-gate2.jpg}
+\else
+\pgfdeclaremask{thumask}{pics/thu-mark1-mask.eps}
+\pgfdeclareimage[mask=thumask,height=0.25cm]{thu}{pics/thu-mark1.eps}
+
+\pgfdeclaremask{titlelogomask}{pics/thu-gate2-mask.eps}
+\pgfdeclareimage[mask=titlelogomask,height=2.5cm]{titlelogo}{pics/thu-gate2.eps}
+\fi
+\fi
+
+%  \begin{CJK*}{UTF8}{song}
+%%----------------------- Theorems ---------------------------------------------------------------------
+%\theoremstyle{plain} %\theoremheaderfont{\heiti}
+%\theorembodyfont{\songti} \theoremindent0em
+%\theoremseparator{\hspace{1em}} \theoremnumbering{arabic}
+%\theoremsymbol{} %定理结束时自动添加的标志
+%\newtheorem{problem}{Problem. }
+\newtheorem{problem}{问题}
+\newtheorem{asm}{假定}
+\newtheorem{theorem}{定理}
+%\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{定义}
+%\newtheorem{definition}{Definition.}
+\newtheorem{lemma}{引理}
+\newtheorem{corollary}{推论}
+%\newtheorem{corollary}{Corollary}
+\newtheorem{proposition}{命题}
+\newtheorem{example}{例}
+\newtheorem{remark}{注}
+\newtheorem{solution}{解答}
+\newcommand\term[1]{#1}
+\def\semichecked{\checkmark\!\!\!\raisebox{0.4 em}{\tiny$\smallsetminus$}}
+\definecolor{Gray}{gray}{0.75}
+%\renewcommand\figurename{\rm 图}
+%\renewcommand\tablename{\bf 表}
+\renewcommand\figurename{\rm Figure}
+\renewcommand\tablename{\bf Table}
+
+\AtBeginSection[]{ % 在每个Subsection前都会加入的Frame
+  \frame<handout:0>{
+    \frametitle{目录}
+%\tableofcontents[current,hideallsubsections]%
+\tableofcontents[sectionstyle=show/shaded,subsectionstyle=show/show/hide]%
+%    \tableofcontents[currentsubsection]
+%\tableofcontents[current,currentsubsection]%currentsection(或 currentsubsection) 仅正常显示当前节(小节)目录,其他部 分半透明 
+  }
+}
+\AtBeginSubsection[]{ % 在每个Subsection前都会加入的Frame
+  \frame<handout:0>{
+    \frametitle{目录}
+%\tableofcontents[current,hideothersubsections,currentsubsection]%
+	\tableofcontents[sectionstyle=show/shaded,subsectionstyle=show/shaded/hide]
+%\tableofcontents[current,currentsubsection]%
+%    \tableofcontents[currentsubsection]
+  }
+}
+
+\setbeamertemplate{background canvas}[vertical shading][bottom=white,top=structure.fg!25]
+\ifxetex
+%\titlegraphic{\pgfuseimage{titlelogonew}}
+\else
+\ifpdf
+%\titlegraphic{\pgfuseimage{titlelogonew}}
+\else
+%\titlegraphic{\pgfuseimage{titlelogo}}
+\fi
+\fi
+\makeatletter
+\newcommand{\setfoot}[1]{
+\usefoottemplate{ %重新定义页脚，加入作者，单位，单位图标，和文档标题
+  \vbox{\tiny%
+    \hbox{%
+      \setbox\beamer@linebox=\hbox to\paperwidth{%
+		\ifxetex
+		%\hbox to.5\paperwidth{\hfill\tiny\color{white}\textbf{\insertshortauthor\quad\insertshortinstitute}\hskip.1cm\lower 0.35em\hbox{\pgfuseimage{thunew}}\hskip.3cm}%
+        \hbox to.5\paperwidth{\hfill\tiny\color{white}\textbf{
+		\insertpagenumber/90\quad\insertshortinstitute}\color{black}#1\hskip.0cm\lower 0.35em\hbox{\pgfuseimage{thunew}}\hskip.3cm}%
+		\else
+	  	\ifpdf
+        \hbox to.5\paperwidth{\hfill\tiny\color{white}\textbf{\insertshortauthor\quad\insertshortinstitute}\hskip.1cm\lower 0.35em\hbox{\pgfuseimage{thunew}}\hskip.3cm}%
+		\else
+        \hbox to.5\paperwidth{\hfill\tiny\color{white}\textbf{\insertshortauthor\quad\insertshortinstitute}\hskip.1cm\lower 0.35em\hbox{\pgfuseimage{thu}}\hskip.3cm}%
+		\fi
+		\fi
+        \hbox to.5\paperwidth{\hskip.3cm\tiny\color{white}\textbf{\insertshorttitle}\hfill}\hfill}%
+      \ht\beamer@linebox=2.625ex%
+      \dp\beamer@linebox=0pt%
+      \setbox\beamer@linebox=\vbox{\box\beamer@linebox\vskip1.125ex}%
+      \color{structure}\hskip-\Gm@lmargin\vrule width.5\paperwidth
+      height\ht\beamer@linebox\color{structure!70}\vrule width.5\paperwidth
+      height\ht\beamer@linebox\hskip-\paperwidth%
+      \hbox{\box\beamer@linebox\hfill}\hfill\hskip-\Gm@rmargin}
+  }
+}
+}
+\setfoot{}
+%\usefoottemplate{ %重新定义页脚，加入作者，单位，单位图标，和文档标题
+%  \vbox{\tiny%
+%    \hbox{%
+%      \setbox\beamer@linebox=\hbox to\paperwidth{%
+%		\ifxetex
+%		%\hbox to.5\paperwidth{\hfill\tiny\color{white}\textbf{\insertshortauthor\quad\insertshortinstitute}\hskip.1cm\lower 0.35em\hbox{\pgfuseimage{thunew}}\hskip.3cm}%
+%        \hbox to.5\paperwidth{\hfill\tiny\color{white}\textbf{\insertpagenumber\quad\insertshortinstitute}\hskip.0cm\lower 0.35em\hbox{\pgfuseimage{thunew}}\hskip.3cm}%
+%		\else
+%	  	\ifpdf
+%        \hbox to.5\paperwidth{\hfill\tiny\color{white}\textbf{\insertshortauthor\quad\insertshortinstitute}\hskip.1cm\lower 0.35em\hbox{\pgfuseimage{thunew}}\hskip.3cm}%
+%		\else
+%        \hbox to.5\paperwidth{\hfill\tiny\color{white}\textbf{\insertshortauthor\quad\insertshortinstitute}\hskip.1cm\lower 0.35em\hbox{\pgfuseimage{thu}}\hskip.3cm}%
+%		\fi
+%		\fi
+%        \hbox to.5\paperwidth{\hskip.3cm\tiny\color{white}\textbf{\insertshorttitle}\hfill}\hfill}%
+%      \ht\beamer@linebox=2.625ex%
+%      \dp\beamer@linebox=0pt%
+%      \setbox\beamer@linebox=\vbox{\box\beamer@linebox\vskip1.125ex}%
+%      \color{structure}\hskip-\Gm@lmargin\vrule width.5\paperwidth
+%      height\ht\beamer@linebox\color{structure!70}\vrule width.5\paperwidth
+%      height\ht\beamer@linebox\hskip-\paperwidth%
+%      \hbox{\box\beamer@linebox\hfill}\hfill\hskip-\Gm@rmargin}
+%  }
+%}
+\makeatother
+%
